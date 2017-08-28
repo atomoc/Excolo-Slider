@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * Excolo Slider - A simple jquery slider
  *
  * Examples and documentation at: 
@@ -248,7 +248,7 @@
                 // The mousemove event should also work outside the slide-wrapper container
                 $(window).on("mousemove", function (e) {
                     base._onMove(e.clientX, e.clientY);
-                    return e.stopPropagation();
+                    return;
                 });
                 // The mouseup event should also work outside the slide-wrapper container
                 $(window).on("mouseup", function (e) {
@@ -337,6 +337,8 @@
             // Update data
             $.data(base, "nextSlide", nextSlide);
 
+            base.$elem.trigger('excolo.prev', nextSlide);
+
             // Perform sliding to the previous slide
             return this._slide();
         },
@@ -369,6 +371,8 @@
 
             // Update data
             $.data(base, "nextSlide", nextSlide);
+
+            base.$elem.trigger('excolo.next', nextSlide);
 
             // Perform sliding to the next slide
             return this._slide();
@@ -435,7 +439,6 @@
             // unbind container events
             if (base.config.hoverPause && !base.data.playPaused)
                 $preContainer.unbind();
-            
 
             // We've stopped
             $.data(base, "isPlaying", false);
@@ -744,6 +747,8 @@
 
             // Pre-Align the slides in a line to prepare for the transition animation
             if (!postalign) base._alignSlides(leftPos);
+
+            base.$elem.trigger('excolo.slide', $slide);
 
             // Animate - css transitions are much better.
             $.data(base, "isAnimating", true);
