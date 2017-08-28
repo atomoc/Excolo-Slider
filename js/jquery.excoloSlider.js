@@ -207,7 +207,6 @@
             if (base.config.touchNav) {
                 $container.on("touchstart", function (e) {
                     var eventData = e.originalEvent.touches[0];
-                    e.preventDefault();
                     base._onMoveStart(eventData.pageX, eventData.pageY);
 					base.actionClick.x=base.currClick.x=eventData.pageX;
 					base.actionClick.y=base.currClick.y=eventData.pageY;
@@ -216,7 +215,6 @@
                 });
                 $container.on("touchmove", function (e) {
                     var eventData = e.originalEvent.touches[0];
-                    e.preventDefault();
 					base.actionClick.action=false;
                     base._onMove(eventData.pageX, eventData.pageY);
 					base.currClick.x=eventData.pageX;
@@ -230,7 +228,6 @@
                             window.location=href;
                         }
 					}
-                    e.preventDefault();
                     base._onMoveEnd();
                     return e.stopPropagation();
                 });
